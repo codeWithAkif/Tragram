@@ -16,6 +16,20 @@
 .Button{
   margin:5px;
 }
+
+.Box{
+  width:20px;
+  float:left;
+  margin-left: 25px;
+}
+.BoxInput{
+  width:100px;
+  float:left;
+  margin-left: 25px;
+}
+.centered{
+  margin: 25px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

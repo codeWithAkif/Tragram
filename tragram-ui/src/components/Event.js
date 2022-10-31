@@ -1,13 +1,19 @@
-import React,{useState} from 'react'
-import {Input} from 'antd'
+import React, { useState } from "react";
+import { Input } from "antd";
 
-export default function Event({eventHandler}) {
+const Event = ({ addEvent }) => {
   const [value, setValue] = useState("");
+
   const onChange = (e) => {
     setValue(e.target.value);
-    eventHandler(value)
+  };
+  const onBlur = () => {
+    addEvent(value);
   };
   return (
-    <div><Input value={value} onChange={onChange}/></div>
-  )
-}
+    <div>
+      <Input value={value} onChange={onChange} onBlur={ onBlur }  />
+    </div>
+  );
+};
+export default Event;

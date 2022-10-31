@@ -1,14 +1,12 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {Input} from 'antd'
 
 
-export default function Place({placeHandler}) {
-  const [value, setValue] = useState("");
+export default function Place({place}) {
   const onChange = (e) => {
-    setValue(e.target.value);
-    placeHandler(value)
-  };
+    place=e.target.value;
+  }
   return (
-    <div><Input value={value} onChange={onChange}/></div>
+    <div><Input onChange={onChange}/></div>
   )
 }

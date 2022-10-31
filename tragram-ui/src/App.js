@@ -5,34 +5,56 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import RoadProgram from "./components/RoadProgram";
 import EventProgram from "./components/EventProgram";
 import ProgramList from "./components/ProgramList";
+import data from "../src/eventData.json"
 
 function App() {
   const [isRoadModalOpen, setIsRoadModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-  const [programList,setProgramList]= useState([]);
+
+  const [programList,setProgramList]= useState(data);
+
+  
   const showRoadModal = () => {
     setIsRoadModalOpen(true);
   };
-  const AddRoad = () => {
-
+  const addRoad = (roadState) => {
+    console.log(roadState)
+    let copy = [...programList];
+    copy = [...copy, {
+       startTime: roadState.startTime,
+       endTime: roadState.endTime,
+       from: roadState.from,
+       to: roadState.to,
+       transportation: roadState.transportation,
+       }];
+    setProgramList(copy);
     setIsRoadModalOpen(false);
   };
-  const handleRoadCancel = () => {
+  const cancelRoadModal = () => {
     setIsRoadModalOpen(false);
   };
   
+
+  const addEvent = (eventState ) => {
+    let copy = [...programList];
+    copy = [...copy, {
+       startTime: eventState.startTime,
+       endTime: eventState.endTime,
+       place: eventState.place,
+       eventName: eventState.eventName
+       }];
+    setProgramList(copy);
+    setIsEventModalOpen(false);
+  }
   const showEventModal = () => {
     setIsEventModalOpen(true);
   };
-  const AddEvent = () => {
-
-    setIsEventModalOpen(false);
-  };
-  const handleEventCancel = () => {
+  const cancelEventModal = () => {
     setIsEventModalOpen(false);
   };
   return (
     <div className="App">
+
       <ProgramList programList={programList}/>
      
       <Button onClick={showRoadModal} type="primary" ghost className="Button">
@@ -44,12 +66,18 @@ function App() {
         New Event
       </Button>
 
-      <Modal width={1000} open={isEventModalOpen} okText="Add" onOk={AddEvent} onCancel={handleEventCancel}>
-      <EventProgram event={event=>setProgramList()}/>
-      </Modal>
-      <Modal width={1000} open={isRoadModalOpen} okText="Add" onOk={AddRoad} onCancel={handleRoadCancel}>
-      <RoadProgram />
-      </Modal>
+      
+      <EventProgram
+       addEvent={addEvent}
+       isModalOpen={isEventModalOpen}
+       cancelEventModal={cancelEventModal}/>
+      
+      <RoadProgram 
+      addRoad={addRoad}
+      isModalOpen={isRoadModalOpen}
+      cancelRoadModal={cancelRoadModal}
+      />
+
     </div>
   );
 }

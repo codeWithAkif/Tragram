@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { TimePicker } from "antd";
 import moment from "moment";
 
 export default function Time({setValue}) {
   const onChange = (time, timeString) => {
-    setValue(timeString);
+    setValue=timeString;
   };
   return (
     <TimePicker

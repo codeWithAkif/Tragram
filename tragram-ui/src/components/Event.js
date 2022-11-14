@@ -12,6 +12,7 @@ const Event = ({ addEvent }) => {
   };
   return (
     <div>
+      <div></div>
       <Input value={value} onChange={onChange} onBlur={ onBlur }  />
     </div>
   );
